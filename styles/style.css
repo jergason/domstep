@@ -1,0 +1,15 @@
+img {
+  width: 100%;
+}
+
+#slide-4 {
+  background: url('./img/jean-valjean.jpg');
+  background-size: cover;
+  color: #eee;
+}
+
+#slide-6 {
+  background: url('./img/rockstar.jpg');
+  background-size: cover;
+  color: #eee;
+}
