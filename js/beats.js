@@ -15,16 +15,16 @@ load(buffers, audioContext, function(err, buffers) {
     sn: buffers[2]
   };
 
-  var beats = new Beats(audioContext, buffers);
+  var beats = new Beats(audioContext, instrumentsToBuffers);
 
   var textarea = document.querySelector('.beats');
   var button = document.querySelector('.drop-the-beat');
   var isPlaying = false;
 
   button.addEventListener('click', function() {
-    var text = text.value;
-    beats.notation(text);
-    beats.startPlaying();
+    var text = textarea.value;
+    var track = beats.notation(text);
+    beats.startPlaying(track);
   });
 
   var stopButton = document.querySelector('.stop-the-beat');

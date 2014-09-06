@@ -2,7 +2,7 @@ var audioContext = window.ctx;
 var isPlaying = false;
 
 window.oscillator = audioContext.createOscillator();
-oscillator.frequency = 300;
+oscillator.frequency.value = 300;
 
 oscillator.connect(audioContext.destination);
 
@@ -17,3 +17,7 @@ sineButton.addEventListener('click', function() {
     isPlaying = true;
   }
 });
+// talk about value more
+// talk about sawtooth waves
+// learn more about the biquad filter
+// talk about the analyser node?

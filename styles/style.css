@@ -2,14 +2,31 @@ img {
   width: 100%;
 }
 
-#slide-4 {
+#slide-3 {
   background: url('./img/jean-valjean.jpg');
   background-size: cover;
   color: #eee;
 }
 
-#slide-6 {
+#slide-5 {
   background: url('./img/rockstar.jpg');
   background-size: cover;
   color: #eee;
 }
+
+textarea {
+  font-family: courier, sans-serif;
+}
+
+input {
+  font-size: 2em;
+}
+
+.slide-content {
+  margin: 0px auto 0 auto;
+}
+
+.slide-content h1 {
+  margin: 0;
+}
+

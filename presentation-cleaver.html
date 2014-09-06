@@ -396,17 +396,34 @@ img {
   width: 100%;
 }
 
-#slide-4 {
+#slide-3 {
   background: url('./img/jean-valjean.jpg');
   background-size: cover;
   color: #eee;
 }
 
-#slide-6 {
-  background: url('./img/jean-valjean.jpg');
+#slide-5 {
+  background: url('./img/rockstar.jpg');
   background-size: cover;
   color: #eee;
 }
+
+textarea {
+  font-family: courier, sans-serif;
+}
+
+input {
+  font-size: 2em;
+}
+
+.slide-content {
+  margin: 0px auto 0 auto;
+}
+
+.slide-content h1 {
+  margin: 0;
+}
+
 
   </style>
 </head>
@@ -418,60 +435,48 @@ img {
   <div class="slide" id="slide-1">
     <section class="slide-content"><h1 id="domstep">DOMSTEP</h1>
 <p>A Browser Dance Party</p>
-<script src="./build/presentation.js"></script></section>
+<script>
+window.ctx = new AudioContext();
+</script></section>
   </div>
   <div class="slide hidden" id="slide-2">
     <section class="slide-content"><h1 id="who-am-i">Who Am I</h1>
 <ul>
 <li><a href="http://twitter.com/jergason">@jergason</a></li>
-<li><a href="https://github.com/jergason">jergason</a> on GitHub</li>
+<li><a href="https://github.com/jergason">jergason</a> on GitHub for assorted dumb things</li>
+<li><a href="http://javascriptjabber.com">JavaScript Jabber</a>, a podcast</li>
 </ul>
 </section>
   </div>
   <div class="slide hidden" id="slide-3">
-    <section class="slide-content"><h1 id="who-am-i">Who Am I</h1>
-<ul>
-<li><a href="http://twitter.com/jergason">@jergason</a></li>
-<li><a href="https://github.com/jergason">jergason</a> on GitHub</li>
-</ul>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-4">
     <section class="slide-content"><h1 id="24601">24601</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-5">
+  <div class="slide hidden" id="slide-4">
     <section class="slide-content"><h1 id="who-am-i">Who Am I</h1>
 <ul>
 <li><a href="http://twitter.com/jergason">@jergason</a></li>
 <li><a href="https://github.com/jergason">jergason</a> on GitHub</li>
+<li><a href="http://javascriptjabber.com">JavaScript Jabber</a>, a podcast</li>
 <li>Former international rock superstar</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-6">
+  <div class="slide hidden" id="slide-5">
     <section class="slide-content"><p><button class="play-goodsman">Unleash The Thunder</button></p>
 <script src="./build/simple-rock.js"></script>
 
 <!--this is my highschool band The Goodsman Brothers.--></section>
   </div>
-  <div class="slide hidden" id="slide-7">
+  <div class="slide hidden" id="slide-6">
     <section class="slide-content"><h1 id="let-s-start-an-edm-band">Let&#39;s start an EDM band</h1>
+<p><img src="./img/dancing.gif">
 <!--EDM is what pretentious people say instead of dubstep.
 It also means we don't need to know how to play an instrument or really
-do anything besides program.--></section>
-  </div>
-  <div class="slide hidden" id="slide-8">
-    <section class="slide-content"><h1 id="step-1">Step 1</h1>
-<p>We need a name</p>
-<input type="text" placeholder="Mariokart Deathmath"></section>
-  </div>
-  <div class="slide hidden" id="slide-9">
-    <section class="slide-content"><h1 id="step-2">Step 2</h1>
-<p>We need to figure out how to play music</p>
+do anything besides program.--></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-10">
+  <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h1 id="web-audio-api">Web Audio API</h1>
 <p><img src="./img/web-audio.png"></p>
 <!-- The web audio api is the solution to all our problems!
@@ -479,34 +484,99 @@ There is an AudioContext, which is basically a container for nodes and buffers.
 You use the context to construct this graph of nodes, and then pipe the sounds
 through the nodes to make beautiful music.--></section>
   </div>
-  <div class="slide hidden" id="slide-11">
+  <div class="slide hidden" id="slide-8">
     <section class="slide-content"><h1 id="an-example-">An Example!</h1>
-<p>Let us make beautiful music</p>
+<p>Beep Boop</p>
 <p><button class="sine-demo">Beep It Up</button></p>
 <script src="./build/sine.js"></script>
 
 <!-- show the code! --></section>
   </div>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h1 id="how-does-sound-even-work">How Does Sound Even Work</h1>
+<p><img src="./img/loudspeaker.gif"></p>
+<!-- We need to talk a little bit about how sound works in general, and
+about how it works in computers.
+
+What we percive as sound is really waves of pressure. These waves travel
+through the air until they reach your ear, where they cause hairs in your
+ear to vibrate. These vibrations get turned in to electrical signals,
+which travel through your cochlear nerve to the brain, where you percieve them
+as sound.--></section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h1 id="our-sound-wave">Our Sound Wave</h1>
+<canvas class="sinwave" height="500" width="500"></canvas><button class="sin-viz-demo">Beep Boop</button>
+<script src="./build/sine-visualization.js"></script>
+
+<!-- Let's look again at the wave we were making last time, and also take a
+second to talk about how computers process and manipulate audio.
+
+Here you can see the sound wave we were making before. Check it out, it is a
+sine function. You can see the amplitude go up and down. The frequency of the
+wave is the time to go through one cycle. Since our frequency is 300, that
+means the wave goes up and down 300 times per second.
+
+We hear frequency as pitch. The higher the frequency (the shorter the distance
+between waves) the higher the pitch. * SHOW EXAMPLE OF RAISING AND LOWERING
+THE FREQENCY TO SEE HOW IT CHANGES *--></section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h1 id="the-worst-theramin">The Worst Theramin</h1>
+<p><div class="wah" style="width:500px;height:500px;background-color:blue;"></div></p>
+<script src="./build/wah.js"></script></section>
+  </div>
   <div class="slide hidden" id="slide-12">
     <section class="slide-content"><h1 id="loading-buffers">Loading Buffers</h1>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-13">
-    <section class="slide-content"><p><div id="wavyscope" style="height:400px;width:400px;"></div></p>
+<p><div id="wavyscope" style="height:400px;width:400px;"></div></p>
 <p><button class="goodsman-demo">Unleash The Thunder</button></p>
 <script src="./build/rock.js"></script>
 
 <!-- Show the code! Get the audio context, make a node, connect it to the
 desination. --></section>
   </div>
-  <div class="slide hidden" id="slide-14">
+  <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h1 id="dropping-the-beats">Dropping The Beats</h1>
-<p><textarea class="beats"></textarea></p>
-<p><button class="drop-the-beat">Drop The Beat</button></p>
-<p><button class="stop-the-beat">Stop The Beat</button></p>
+<p><textarea class="beats" rows="6" cols="30">
+hh| -- -- -- -- -- -- -- -- |
+sn| -- -- sn -- -- -- -- -- |
+bd| bd -- -- -- -- -- bd -- |
+</textarea></p>
+<p><button class="drop-the-beat">Drop The Beat</button><button class="stop-the-beat">Stop The Beat</button></p>
 <script src="./build/beats.js"></script></section>
   </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h2 id="the-secret-of-wob">The secret of wob</h2>
+<p><img src="./img/am.png"></p>
+</section>
+  </div>
   <div class="slide hidden" id="slide-15">
+    <section class="slide-content"><h1 id="wob-example">Wob Example</h1>
+<p><button class="wob-it-up">Wob It Up</button><button class="stop-wob-it-up">Stop The Wob</button></p>
+<script src="./js/wob-example.js"></script></section>
+  </div>
+  <div class="slide hidden" id="slide-16">
+    <section class="slide-content"><h1 id="putting-it-together">Putting it together</h1>
+<p><textarea class="wobble-beats" rows="6" cols="100">
+bd| bd -- -- -- -- -- -- -- | bd -- bd -- -- -- -- -- | bd -- -- -- -- -- -- -- | bd -- bd -- -- -- -- -- |
+sn| -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- |
+hh| -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- |
+</textarea></p>
+<p><div class="beat-wah" style="width:500px;height:100px;background-color:blue;"></div></p>
+<p><button class="drop-the-wobble-beat">Drop The Beat</button><button class="stop-the-wobble-beat">Stop The Beat</button></p>
+<script src="./build/wobble-beats-wah.js"></script></section>
+  </div>
+  <div class="slide hidden" id="slide-17">
+    <section class="slide-content"><h1 id="learn-more">Learn More</h1>
+<ul>
+<li><a href="http://webaudio.github.io/web-audio-api/">The Spec</a></li>
+<li><a href="https://www.youtube.com/watch?v=YBQ5pzvgbOE">Signal Processing With The Web Audio API</a></li>
+<li><a href="http://chimera.labs.oreilly.com/books/1234000001552/pr01.html">O&#39;Reilly Book</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">Getting Started With Web Audio API</a></li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-18">
     <section class="slide-content"><div class="author">
   <h1 class="name">Jamison Dance</h1>
     <h3 class="twitter">
@@ -642,6 +712,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.onkeydown = function (e) {
     var kc = e.keyCode;
+
+    // don't steal keyboard when body isn't focused
+    if (document.activeElement != document.body) {
+      return;
+    }
 
     // left, down, H, J, backspace, PgUp - BACK
     // up, right, K, L, space, PgDn - FORWARD
