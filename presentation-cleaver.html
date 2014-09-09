@@ -506,7 +506,12 @@ as sound.--></section>
   </div>
   <div class="slide hidden" id="slide-10">
     <section class="slide-content"><h1 id="our-sound-wave">Our Sound Wave</h1>
-<canvas class="sinwave" height="500" width="500"></canvas><button class="sin-viz-demo">Beep Boop</button>
+<div>
+<canvas class="sinwave" height="500" width="500"></canvas>
+<input class="sinwave-range" type="range" min="100" max="300">
+<button class="sin-viz-demo">Beep Boop</button>
+</div>
+
 <script src="./build/sine-visualization.js"></script>
 
 <!-- Let's look again at the wave we were making last time, and also take a
@@ -518,15 +523,32 @@ wave is the time to go through one cycle. Since our frequency is 300, that
 means the wave goes up and down 300 times per second.
 
 We hear frequency as pitch. The higher the frequency (the shorter the distance
-between waves) the higher the pitch. * SHOW EXAMPLE OF RAISING AND LOWERING
-THE FREQENCY TO SEE HOW IT CHANGES *--></section>
+between waves) the higher the pitch. SHOW EXAMPLE OF RAISING AND LOWERING
+THE FREQENCY TO SEE HOW IT CHANGES --></section>
   </div>
   <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h1 id="how-computers-process-audio">How Computers Process Audio</h1>
+<p><img src="./img/digitized.png"></p>
+<!-- why is this slide here? what do they know after this slide that
+they wont know before that they need to understand the presentation? -->
+
+<!-- The wave we were looking at before was a sine wave, which we have functions
+to easily calculate. However, computers don't usually represent sound as
+a functino that would generate the wave. This would get way too complex as
+the sound grows more complex. Instead, they use something called PCM to
+represent sound as a buffer of numbers.
+
+You divide the curve up into chunks, measure it at each chunk, and end up
+with an array of numbers representing the amplitude of the curve at each
+point. In JS these are floats, and there are 44,000 samples per second.
+at 64 bits * 44000, that is 2816000 bits, or 340kB per second. SUPER ineficcient --></section>
+  </div>
+  <div class="slide hidden" id="slide-12">
     <section class="slide-content"><h1 id="the-worst-theramin">The Worst Theramin</h1>
 <p><div class="wah" style="width:500px;height:500px;background-color:blue;"></div></p>
 <script src="./build/wah.js"></script></section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h1 id="loading-buffers">Loading Buffers</h1>
 <p><div id="wavyscope" style="height:400px;width:400px;"></div></p>
 <p><button class="goodsman-demo">Unleash The Thunder</button></p>
@@ -535,7 +557,7 @@ THE FREQENCY TO SEE HOW IT CHANGES *--></section>
 <!-- Show the code! Get the audio context, make a node, connect it to the
 desination. --></section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-14">
     <section class="slide-content"><h1 id="dropping-the-beats">Dropping The Beats</h1>
 <p><textarea class="beats" rows="6" cols="30">
 hh| -- -- -- -- -- -- -- -- |
@@ -545,17 +567,26 @@ bd| bd -- -- -- -- -- bd -- |
 <p><button class="drop-the-beat">Drop The Beat</button><button class="stop-the-beat">Stop The Beat</button></p>
 <script src="./build/beats.js"></script></section>
   </div>
-  <div class="slide hidden" id="slide-14">
+  <div class="slide hidden" id="slide-15">
     <section class="slide-content"><h2 id="the-secret-of-wob">The secret of wob</h2>
 <p><img src="./img/am.png"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-15">
+  <div class="slide hidden" id="slide-16">
     <section class="slide-content"><h1 id="wob-example">Wob Example</h1>
 <p><button class="wob-it-up">Wob It Up</button><button class="stop-wob-it-up">Stop The Wob</button></p>
 <script src="./js/wob-example.js"></script></section>
   </div>
-  <div class="slide hidden" id="slide-16">
+  <div class="slide hidden" id="slide-17">
+    <section class="slide-content"><h1 id="you-are-also-in-our-band">You Are Also In Our Band</h1>
+<div>
+<canvas class="clip-editor" height="100" width="500"></canvas>
+<button class="record">Record</button>
+</div>
+
+<script src="./build/record.js"></script></section>
+  </div>
+  <div class="slide hidden" id="slide-18">
     <section class="slide-content"><h1 id="putting-it-together">Putting it together</h1>
 <p><textarea class="wobble-beats" rows="6" cols="100">
 bd| bd -- -- -- -- -- -- -- | bd -- bd -- -- -- -- -- | bd -- -- -- -- -- -- -- | bd -- bd -- -- -- -- -- |
@@ -566,7 +597,7 @@ hh| -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- 
 <p><button class="drop-the-wobble-beat">Drop The Beat</button><button class="stop-the-wobble-beat">Stop The Beat</button></p>
 <script src="./build/wobble-beats-wah.js"></script></section>
   </div>
-  <div class="slide hidden" id="slide-17">
+  <div class="slide hidden" id="slide-19">
     <section class="slide-content"><h1 id="learn-more">Learn More</h1>
 <ul>
 <li><a href="http://webaudio.github.io/web-audio-api/">The Spec</a></li>
@@ -576,7 +607,7 @@ hh| -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- | -- -- hh hh -- -- -- -- 
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-18">
+  <div class="slide hidden" id="slide-20">
     <section class="slide-content"><div class="author">
   <h1 class="name">Jamison Dance</h1>
     <h3 class="twitter">
@@ -721,9 +752,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // left, down, H, J, backspace, PgUp - BACK
     // up, right, K, L, space, PgDn - FORWARD
     // enter - FULLSCREEN
-    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 33) {
       navigate(-1);
-    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 34) {
       navigate(1);
     } else if (kc === 13) {
       toggleFullScreen();

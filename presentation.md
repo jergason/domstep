@@ -93,7 +93,11 @@ as sound.-->
 
 #Our Sound Wave
 
-<canvas class="sinwave" height="500" width="500"></canvas><button class="sin-viz-demo">Beep Boop</button>
+<div>
+<canvas class="sinwave" height="500" width="500"></canvas>
+<input class="sinwave-range" type="range" min="100" max="300">
+<button class="sin-viz-demo">Beep Boop</button>
+</div>
 
 <script src="./build/sine-visualization.js"></script>
 
@@ -106,8 +110,27 @@ wave is the time to go through one cycle. Since our frequency is 300, that
 means the wave goes up and down 300 times per second.
 
 We hear frequency as pitch. The higher the frequency (the shorter the distance
-between waves) the higher the pitch. * SHOW EXAMPLE OF RAISING AND LOWERING
-THE FREQENCY TO SEE HOW IT CHANGES *-->
+between waves) the higher the pitch. SHOW EXAMPLE OF RAISING AND LOWERING
+THE FREQENCY TO SEE HOW IT CHANGES -->
+
+--
+
+#How Computers Process Audio
+<img src="./img/digitized.png">
+
+<!-- why is this slide here? what do they know after this slide that
+they wont know before that they need to understand the presentation? -->
+
+<!-- The wave we were looking at before was a sine wave, which we have functions
+to easily calculate. However, computers don't usually represent sound as
+a functino that would generate the wave. This would get way too complex as
+the sound grows more complex. Instead, they use something called PCM to
+represent sound as a buffer of numbers.
+
+You divide the curve up into chunks, measure it at each chunk, and end up
+with an array of numbers representing the amplitude of the curve at each
+point. In JS these are floats, and there are 44,000 samples per second.
+at 64 bits * 44000, that is 2816000 bits, or 340kB per second. SUPER ineficcient -->
 
 --
 
@@ -150,6 +173,16 @@ bd| bd -- -- -- -- -- bd -- |
 #Wob Example
 <button class="wob-it-up">Wob It Up</button><button class="stop-wob-it-up">Stop The Wob</button>
 <script src="./js/wob-example.js"></script>
+
+--
+
+#You Are Also In Our Band
+<div>
+<canvas class="clip-editor" height="100" width="500"></canvas>
+<button class="record">Record</button>
+</div>
+
+<script src="./build/record.js"></script>
 
 --
 
