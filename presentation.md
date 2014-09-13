@@ -177,9 +177,7 @@ bd| bd -- -- -- -- -- bd -- |
 --
 
 #You Are Also In Our Band
-<div>
-<canvas class="clip-editor" height="100" width="500"></canvas>
-<button class="record">Record</button>
+<div class="join-our-band">
 </div>
 
 <script src="./build/record.js"></script>
