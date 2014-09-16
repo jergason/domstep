@@ -1,5 +1,4 @@
 var audioContext = window.ctx;
-var audioContext = window.ctx;
 var isPlaying = false;
 
 var oscillator = audioContext.createOscillator();

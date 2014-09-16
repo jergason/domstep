@@ -9,11 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ar-drone": "^0.3.2",
+    "boids": "^1.0.0",
     "browserify": "^5.11.0",
+    "express": "^4.9.0",
     "gulp": "^3.8.7",
     "notes-to-frequencies": "^1.0.0",
     "react": "^0.11.1",
     "reactify": "^0.14.0",
+    "socket.io": "^1.1.0",
     "vinyl-source-stream": "^0.1.1",
     "webaudio-buffer-loader": "^1.0.0"
   }

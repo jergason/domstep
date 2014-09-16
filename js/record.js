@@ -54,12 +54,10 @@ var App = React.createClass({
     if (shouldRecord) {
       this.recorder.clear();
       this.recorder.record();
-      // TODO: record
     }
     else {
       this.recorder.stop();
       this.recorder.getBuffer(function(buf) {
-        console.log('got a buffer, it is', buf);
         self.setState({buffer: buf});
       });
     }
@@ -70,6 +68,7 @@ var App = React.createClass({
   // so we can DO WHAT WE WILL WITH IT
   handleTrimmedBuffer: function(trimmedBuffer) {
     var webAudioBuffer = hydrateAudioBuffer(trimmedBuffer, this.props.audioContext);
+    window.ourBuffer = webAudioBuffer;
     this.setState({trimmedBuffer: webAudioBuffer});
   },
 
@@ -101,7 +100,6 @@ var App = React.createClass({
   }
 });
 
-console.log('rendering component into ', document.querySelector('.join-our-band'));
 React.renderComponent(<App audioContext={window.ctx}/>, document.querySelector('.join-our-band'));
 
 /**

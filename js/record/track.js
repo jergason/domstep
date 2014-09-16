@@ -8,6 +8,11 @@ var Track = React.createClass({
   getDefaultProps: function() {
     return {width: 500, height: 100};
   },
+
+  getInitialState: function() {
+    return {isDragging: false};
+  },
+
   componentDidMount: function() {
     // TODO: draw buffers in dom
     if (!this.props.buffer) {
@@ -57,9 +62,12 @@ var Track = React.createClass({
     }
   },
   getLocalX: function(e) {
-    var domNode = this.getDOMNode();
-    var localX = e.pageX - domNode.offsetLeft;
-    return localX;
+    // TODO: cross-browser way to do this?
+    return e.nativeEvent.layerX;
+    // This doesn't work once I moved to reveal.js for some reason
+    //var domNode = this.getDOMNode();
+    //var localX = e.pageX - domNode.offsetLeft;
+    //return localX;
   },
 
   mouseDown: function(e) {
@@ -73,11 +81,20 @@ var Track = React.createClass({
     }
 
     var selectionEnd = this.getLocalX(e);
-    var selectionWidth = selectionEnd - this.state.selectionStart;
-    var trimmedBuffer = trimBuffer(this.state.selectionStart, selectionEnd, this.props.buffer);
+    var selectionStart = this.state.selectionStart;
+
+    // if we are dragging backwards
+    if (selectionEnd < selectionStart) {
+      var swap = selectionStart;
+      selectionStart = selectionEnd;
+      selectionEnd = swap;
+    }
+
+    var selectionWidth = selectionEnd - selectionStart;
+    var trimmedBuffer = trimBuffer(selectionStart, selectionEnd, this.props.buffer);
 
     // draw selection, notify parents that it was selected
-    this.drawSelection(this.state.selectionStart, selectionWidth);
+    this.drawSelection(selectionStart, selectionWidth);
     this.props.onTrimmed(trimmedBuffer);
 
     this.setState({
@@ -92,12 +109,24 @@ var Track = React.createClass({
     canvasContext.fillRect(selectionStart, 0, selectionWidth, this.props.height);
   },
 
+  mouseMove: function(e) {
+    if (!this.state.isDragging) {
+      return;
+    }
+    var selectionEnd = this.getLocalX(e);
+    var selectionWidth = selectionEnd - this.state.selectionStart;
+
+    // draw selection, notify parents that it was selected
+    this.clearSelection();
+    this.drawSelection(this.state.selectionStart, selectionWidth);
+  },
+
   clearSelection: function() {
     this.drawBuffer();
   },
 
   render: function() {
-    return <canvas onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}
+    return <canvas onMouseMove={this.mouseMove} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}
       className="track-editor" width={this.props.width}
       height={this.props.height}>
       </canvas>

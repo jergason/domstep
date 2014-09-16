@@ -4,7 +4,7 @@ var WavyJones = function (context, elem) {
 
   analyser.width = elem.offsetWidth;
   analyser.height = elem.offsetHeight;
-  analyser.lineColor = 'yellow';
+  analyser.lineColor = '#1f8dd6';
   analyser.lineThickness = 5;
 
   var svgNamespace = "http://www.w3.org/2000/svg";

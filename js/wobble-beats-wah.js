@@ -22,6 +22,8 @@ load(buffers, audioContext, function(err, buffers) {
 
 
   function beatEmitter(beats) {
+    // TODO: record wah track, play it back
+    // a e d g
     //bassWob.src.frequency.setValueAtTime(notes('C1'), beats[0]);
     //bassWob.lfo.frequency.setValueAtTime(3, beats[0]);
     //wob.src.frequency.setValueAtTime(notes('G3'), beats[0]);

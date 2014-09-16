@@ -4,7 +4,7 @@ author:
   twitter: jergason
   url: http://jamisondance.com
 controls: false
-style: styles/style.css
+style: styles/pure.css
 
 --
 
