@@ -1,0 +1,450 @@
+<html>
+<head>
+  <title>DOMSTEP: A Browser Dance Party</title>
+
+  <link rel="stylesheet" href="/styles/reveal.css">
+  <!-- For HighlightJS -->
+  <link rel="stylesheet" href="/styles/zenburn.css">
+  <link rel="stylesheet" href="/styles/theme/one-mozilla.css" id="theme">
+  <script src="/js/lib/head.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    textarea {
+        font-family: courier, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>DOMSTEP</h1>
+        <h2>A Browser Dance Party</h2>
+        <script>
+          window.ctx = new AudioContext();
+        </script>
+      </section>
+
+      <section>
+        <h1>Who Am I</h1>
+
+        <ul>
+          <li class="fragment">Jamison Dance</li>
+          <li class="fragment"><a href="https://twitter.com/jergason">@jergason</a></li>
+          <li class="fragment"><a href="https://github.com/jergason">jergason</a> on GitHub for assorted dumb things</li>
+          <li class="fragment"><a href="http://javascriptjabber.com">JavaScript Jabber</a>, a podcast about C#</li>
+        </ul>
+        <h2 class="fragment roll-in">(ી(΄◞ิ౪◟ิ‵)ʃ)</h2>
+
+      <!-- 27 years of people making stupid jokes about my last  name. "uhuhuh do you like to da-" "NO"
+        TODAY, THEY BECOME REALITY. -->
+      </section>
+
+      <section data-background="/img/jean-valjean.jpg">
+        <h1 style="color: white;">24601</h1>
+        <!-- les miserables humor is the most universal humor -->
+      </section>
+
+      <section>
+        <h1>Who Am I</h1>
+
+        <ul>
+          <li>Jamison Dance</li>
+          <li><a href="https://twitter.com/jergason">@jergason</a></li>
+          <li><a href="https://github.com/jergason">jergason</a> on GitHub for assorted dumb things</li>
+          <li><a href="http://javascriptjabber.com">JavaScript Jabber</a>, a podcast about JavaScript</li>
+          <li class="fragment">Former international rock superstar</li>
+        </ul>
+      </section>
+
+      <section data-background="/img/rockstar.jpg">
+        <button class="play-goodsman">Unleash The Thunder</button>
+        <script src="./build/simple-rock.js"></script>
+
+        <!--this is my highschool band The Goodsman Brothers. Now I have established
+        my musical credibility, and you should listen to me.
+
+        I'm not an audio engineer, and I'm an amateur musician at best. This is
+        told from the perspective of a software person who decided to learn
+        about web audio. That means if you know stuff about music or
+        signal processing you could do WAAAY cooler things than these.-->
+      </section>
+
+      <section>
+        <h1>Let's start an EDM band</h1>
+
+        <img src="./img/dancing.gif">
+        <!--EDM is what pretentious people say instead of dubstep.
+        It also means we don't need to know how to play an instrument or really
+        do anything besides program.-->
+      </section>
+
+      <section>
+        <h1>Web Audio API</h1>
+        <img src="./img/web-audio.png">
+        <!-- The web audio api is the solution to all our problems!
+        There is an AudioContext, which is basically a container for nodes and buffers.
+        You use the context to construct this graph of nodes, and then pipe the sounds
+        through the nodes to make beautiful music. -->
+      </section>
+
+      <section>
+        <h2>Wood Audio API</h2>
+        <img style="height:89%;" src="/img/moog.jpg">
+
+        <!-- how many of you play music? how many of you have ever played
+          with an old analog synth? they are basically a graph of nodes, except
+          the nodes are physical devices. you have one synth, which is the
+          whole machine. you plug in some nodes that generate sound, like
+          a keyboard or a tape machine or w/e, and hook them up to other
+          nodes that modify sound, like a filter or w/e. This is also what
+          you do with the web audio api!
+
+         In a world where things like overtone, why do you care about the
+         lowly Web Audio API?
+         Because you can do things like this!
+
+        -->
+      </section>
+
+
+      <section>
+        <h2>The StrangeLoop Orchestra</h2>
+        <div style="display: flex; flex-direction: row;">
+          <div>
+            <pre>
+            <code class="javascript">
+var c = new AudioContext();
+var n = c.createOscillator();
+n.frequency.value = 220;
+n.connect(c.destination);
+n.start(); n.stop(8);
+            </code>
+            </pre>
+          </div>
+
+          <div>
+            <pre>
+            <code class="javascript">
+var c = new AudioContext();
+var n = c.createOscillator();
+n.frequency.value = 329.63;
+n.connect(c.destination);
+n.start(); n.stop(6);
+            </code>
+            </pre>
+          </div>
+
+          <div>
+            <pre>
+            <code class="javascript">
+var c = new AudioContext();
+var n = c.createOscillator();
+n.frequency.value = 440;
+n.connect(c.destination);
+n.start(); n.stop(4);
+            </code>
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      <section data-background="/img/monolith.jpg">
+        <script src="/build/monolith.js"></script>
+      </section>
+
+      <section>
+        <h2>An Example!</h2>
+
+        <button class="sine-demo">Beep It Up</button>
+        <script src="./build/sine.js"></script>
+        <pre class="fragment"><code class="javascript big">
+var ctx = new AudioContext();
+var sine = ctx.createOscillator();
+sine.frequency.value = 300;
+sine.connect(ctx.destination);
+sine.start();</code></pre>
+
+        <!-- show the code! -->
+      </section>
+
+      <section>
+        <h2>How Does Sound Even Work</h2>
+        <img src="./img/loudspeaker.gif">
+
+        <!-- We need to talk a little bit about how sound works in general, and
+        about how it works in computers.
+
+        What we percive as sound is really waves of pressure. These waves travel
+        through the air until they reach your ear, where they cause hairs in your
+        ear to vibrate. These vibrations get turned in to electrical signals,
+        which travel through your cochlear nerve to the brain, where you percieve them
+        as sound.-->
+      </section>
+
+      <section>
+        <h2>Our Sound Wave</h2>
+
+        <canvas class="sinwave" height="500" width="500"></canvas>
+        <input class="sinwave-range" type="range" min="100" max="300">
+        <button class="sin-viz-demo">Beep Boop</button>
+        <script src="./build/sine-visualization.js"></script>
+
+        <!-- Let's look again at the wave we were making last time.
+
+        Check it out, it is a sine wave. You can see the amplitude go up and
+        down. The frequency of the
+        wave is the time to go through one cycle. Since our frequency is 300, that
+        means the wave goes up and down 300 times per second.
+
+        We hear frequency as pitch. The higher the frequency (the shorter the distance
+        between waves) the higher the pitch. SHOW EXAMPLE OF RAISING AND LOWERING
+        THE FREQENCY TO SEE HOW IT CHANGES -->
+      </section>
+
+      <section>
+        <h2>Digital Audio</h2>
+        <img src="./img/digitized.png">
+
+        <!-- why is this slide here? what do they know after this slide that
+        they wont know before that they need to understand the presentation? -->
+
+        <!-- The wave we were looking at before was a sine wave, which we have functions
+        to easily calculate. However, computers don't usually represent sound as
+        a functino that would generate the wave. This would get way too complex as
+        the sound grows more complex. Instead, they use something called PCM to
+        represent sound as a buffer of numbers.
+
+        You divide the curve up into chunks, measure it at each chunk, and end up
+        with an array of numbers representing the amplitude of the curve at each
+        point. -->
+      </section>
+
+      <section>
+        <h2>The Worst Theramin</h2>
+        <div class="wah" style="float:left;width:500px;height:500px;background-color:#1f8dd6;"></div>
+        <canvas class="wah" width="500" height="500"></canvas>
+        <script src="./build/wah.js"></script>
+      </section>
+
+      <section>
+        <pre><code class="javascript big">
+var ctx = new AudioContext();
+var signal = ctx.createOscillator();
+signal.type = 'sawtooth';
+var filter = ctx.ceateBiquadFilter();
+signal.connect(filter);
+filter.connect(ctx.destination);
+signal.start();
+// magical pseduo code
+filter.frequency.value = getMouseX();
+signal.frequency.value = getMouseY();
+</code></pre>
+      </section>
+
+      <section>
+        <h2>Loading Buffers</h2>
+        <div id="wavyscope" style="margin:auto;height:400px;width:400px;"></div>
+        <button class="goodsman-demo">Unleash The Thunder</button>
+        <script src="./build/rock.js"></script>
+        <!-- Show the code! Get the audio context, make a node, connect it to the
+        desination. -->
+      </section>
+
+      <section>
+<pre><code class="javascript big">
+var load = require('webuadio-buffer-loader');
+var ctx = new AudioContext();
+load('/song.mp3', ctx, function(err, buff) {
+  // lol no errors in demos
+  var node = ctx.createBufferSource();
+  // ᕦ(ò_óˇ)ᕤ
+  node.buffer = buff;
+  node.connect(ctx.destination);
+  node.start();
+});
+</code></pre>
+      </section>
+
+
+      <section>
+        <h2>Dropping The Beat</h2>
+<textarea class="beats" rows="6" cols="30">hh| -- -- -- -- -- -- -- -- |
+sn| -- -- -- -- -- sn -- -- |
+bd| bd -- bd -- -- -- -- -- |</textarea>
+        <button class="drop-the-beat">Drop The Beat</button><button class="stop-the-beat">Stop The Beat</button>
+        <script src="./build/beats.js"></script>
+
+      </section>
+
+      <section>
+<pre><code class="javascript big">
+var Beats = require('beatsjs');
+var ctx = new AudioContext();
+// load sounds to AudioBuffers
+var instrumentsToBuffers = {
+  hh: buffers[0],
+  bd: buffers[1],
+  sn: buffers[2]
+};
+var beats = new Beats(ctx, instrumentsToBuffers);
+var track = beats.notation('bd| bd -- bd -- bd --');
+beats.startPlaying(track);
+}
+</code></pre>
+      </section>
+
+      <section>
+        <h2>Put A Boid On It</h2>
+        <canvas width="800" height="500" class="flocking"></canvas>
+        <button class="start-flocking">Toggle Flocking</button>
+        <script src="./build/flocking.js"></script>
+
+        <!--
+          Flocking is a super simple set of rules that simulate the behavior
+          of a flock. Think birds, bats, fish, etc. Artificial life!
+
+          Three rules are: separation, alignment, cohesion.
+
+          Separation: each boid tries to not get too close to its neighbor.
+          Alignment: each boid tries to go roughly in the same direction
+            as its neighbors.
+          Cohesion: each bird tries to not get too far away from its neighbors.
+        -->
+      </section>
+
+      <section>
+        <h2>Beats and Boids</h2>
+        <canvas width="800" height="500" class="flocking-beats"></canvas>
+        <button class="start-flocking-beats">Toggle Flocking</button>
+        <script src="./build/flockingBeats.js"></script>
+      </section>
+
+      <section>
+        <h2>Syncing To The Beat</h2>
+        <pre><code class="javascript big">
+beats.beatEmitter = function(beatTimes) {
+  // turn audio context time into a timeout time
+  var beatTime = auioContextTimeToTimeoutTime(beats.ctx, beatTimes[0]);
+  setTimeout(function() {
+    doStuffOnTheBeat();
+  }, beatTime);
+});
+</code></pre>
+
+      </section>
+
+
+      <!--<section>-->
+        <!--<h2>Robot Backup Dancer</h2>-->
+        <!--<button class="start-dancing-beats">Toggle The Dance</button>-->
+        <!--<script src="./build/dancingRobots.js"></script>-->
+        <!--<pre class="fragment"><code class="javascript big">-->
+<!--var socket = io.connect('http://localhost');-->
+<!--beats.beatEmitter = function(beatTimes) {-->
+  <!--var beatTime = auioContextTimeToTimeoutTime(beats.ctx, beatTimes[0]);-->
+  <!--setTimeout(function() {-->
+    <!--socket.emit('beat');-->
+  <!--}, beatTime);-->
+<!--});-->
+<!--</code></pre>-->
+      <!--</section>-->
+
+      <section>
+        <!-- TODO: a joke here -->
+        <h2>The Secret of Wob</h2>
+        <img style="height:82%;" src="./img/am.png">
+      </section>
+
+      <section>
+        <h2>Wob Example</h2>
+        <button class="wob-it-up">Wob It Up</button><button class="stop-wob-it-up">Stop The Wob</button>
+        <script src="./js/wob-example.js"></script>
+        <pre class="fragment"><code class="javascript big">
+var ctx = new AudioContext();
+var oscillator = ctx.createOscillator();
+var gain = ctx.createGain();
+var gainOscillator = ctx.createOscillator();
+
+oscillator.connect(gain);
+gain.connect(ctx.destination);
+gainOscillator.connect(gain.gain);
+gainOscillator.frequency.value = 3;
+gainOscillator.start();
+oscillator.start();
+</code></pre>
+      </section>
+
+      <section>
+        <!-- TODO: photoshop strangeloop logo on top of our band -->
+        <h2>You Are Also In Our Band</h2>
+        <div class="join-our-band">
+        </div>
+        <!-- code is in js/record.js, but loaded in js/reactify.js to avoid
+          having multiple copies of react on the page. -->
+      </section>
+
+      <!--<section>-->
+        <!--<h2>Putting it together</h2>-->
+<!--<textarea class="wobble-beats" rows="6" cols="100">-->
+<!--bd| bd bd -- -- -- -- -- -- | bd -- bd -- -- -- -- -- | bd bd -- -- -- -- -- -- | bd -- -- -- -- -- -- -- |-->
+<!--sn| -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- | -- -- -- -- sn -- -- -- |-->
+<!--hh| -- -- -- -- -- -- -- -- | -- -- -- -- -- -- -- -- | -- -- -- -- -- -- -- -- | -- -- -- -- -- -- -- -- |-->
+<!--</textarea>-->
+        <!--<div class="beat-wah" style="width:500px;height:100px;background-color:#1f8dd6;"></div>-->
+        <!--<button class="drop-the-wobble-beat">Drop The Beat</button><button class="stop-the-wobble-beat">Stop The Beat</button>-->
+        <!--<script src="./build/wobble-beats-wah.js"></script>-->
+      <!--</section>-->
+
+      <section>
+        <div class="performance"></div>
+        <!-- code is in js/performance.js, but loaded in js/reactify.js to avoid
+          having multiple copies of react on the page. -->
+      </section>
+
+      <section>
+        <h2>Learn More</h2>
+
+        <ul>
+          <li><a href="http://webaudio.github.io/web-audio-api/">The Spec</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Mozilla API Docs</a></li>
+          <li><a href="https://www.youtube.com/watch?v=YBQ5pzvgbOE">Signal Processing With The Web Audio API</a></li>
+          <li><a href="http://chimera.labs.oreilly.com/books/1234000001552/pr01.html">O'Reilly Book</a></li>
+          <li><a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">Getting Started With Web Audio API</a></li>
+          <li><a href="http://overtone.github.io/">Overtone</a> for ultimate inspiration</li>
+        </ul>
+      </section>
+
+      <section>
+        <!-- there is an explosion of interest, activity and energy around
+          the Web Audio API. People are building amazing things with it,
+          and -->
+        <h2>Cool Things People Made</h2>
+        <ul>
+          <li><a href="http://flockingjs.org/demos/interactive/html/playground.html">flockingjs</a> by <a href="https://twitter.com/colinbdclark">@colinbdclark</a></li>
+          <li><a href="http://web-audio-editor.herokuapp.com/">Collaborative Web Audio Editor</a> by <a href="https://twitter.com/thedeftone">@thedeftone</a></li>
+          <li><a href="https://splice.com/henryfong/henry-fong-j-trick-scream-original-mix/3CB336B8-71CB-4366-86FD-1D18E60F5594?er=https%3A%2F%2Fblog.splice.com%2Fwelcome-to-public-beta-introducing-dna-player%2F">Splice</a>, a cloud music editor</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Show Me What You Make</h1>
+        <h2><a href="https://twitter.com/jergason">@jergason</a></h2>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="/build/reactify.js"></script>
+  <script src="/js/lib/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      history: true,
+      center: true,
+      width: 1080,
+      transition: 'none',
+      dependencies: [{ src: '/js/lib/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+    });
+  </script>
+</body>
+</html>
