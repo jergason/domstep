@@ -14,7 +14,7 @@ function audioContextTimeToTimeoutTime(ctx, contextTime) {
   return deltaSeconds * 1000;
 }
 
-load(['/sounds/bd.wav', '/sounds/sn.wav', '/sounds/hh.wav'], audioContext, function(err, sounds) {
+load(['./sounds/bd.wav', './sounds/sn.wav', './sounds/hh.wav'], audioContext, function(err, sounds) {
   var instrumentsToBuffers = {
     bd: sounds[0],
     sn: sounds[1],

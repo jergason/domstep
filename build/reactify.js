@@ -20,11 +20,11 @@ var Performance = React.createClass({displayName: 'Performance',
   componentDidMount: function() {
     var self = this;
     var soundsToLoad = [
-      '/sounds/junky.ogg',
-      '/sounds/Do_K1.wav',
-      '/sounds/Hgh_H2.wav',
-      '/sounds/Osc_Snr.wav',
-      '/sounds/Wsh_Clp2.wav'
+      './sounds/junky.ogg',
+      './sounds/Do_K1.wav',
+      './sounds/Hgh_H2.wav',
+      './sounds/Osc_Snr.wav',
+      './sounds/Wsh_Clp2.wav'
     ];
     load(soundsToLoad, this.props.ctx, function(err, sounds) {
       var instrumentsToBuffers = {

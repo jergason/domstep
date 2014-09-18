@@ -3,7 +3,7 @@ var wavyJones = require('./wavy-jones');
 
 var audioContext = window.ctx;
 
-loader('/sounds/hot-headed-woman.ogg', audioContext, function(err, steaks) {
+loader('./sounds/hot-headed-woman.ogg', audioContext, function(err, steaks) {
   if (err) {
     return console.error(err);
   }

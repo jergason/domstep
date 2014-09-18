@@ -3,7 +3,7 @@ var loader = require('webaudio-buffer-loader');
 
 var audioContext = window.ctx;
 
-loader('/sounds/hot-headed-woman.ogg', audioContext, function(err, steaks) {
+loader('./sounds/hot-headed-woman.ogg', audioContext, function(err, steaks) {
   if (err) {
     return console.error(err);
   }
