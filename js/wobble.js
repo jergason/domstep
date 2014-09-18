@@ -25,7 +25,9 @@ function kickOutTheJams(context) {
   return {
     lfo: res.filterLfo,
     freqLfo: wob,
-    src: src
+    src: src,
+    wob: wob,
+    finalGain: finalGain
   };
 }
 

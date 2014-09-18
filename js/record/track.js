@@ -45,7 +45,7 @@ var Track = React.createClass({
   _drawBuffer: function(data, context, width, height) {
     var step = Math.ceil( data.length / width );
     var amp = height / 2;
-    context.fillStyle = "silver";
+    context.fillStyle = "#dd514c";
     context.globalAlpha = 1;
     context.clearRect(0,0,width,height);
     for(var i=0; i < width; i++) {
@@ -73,6 +73,13 @@ var Track = React.createClass({
   mouseDown: function(e) {
     this.clearSelection();
     this.setState({isDragging: true, selectionStart: this.getLocalX(e)});
+  },
+
+  mouseLeave: function() {
+    if (this.state.isDragging) {
+      this.clearSelection();
+      this.setState({isDragging: false});
+    }
   },
 
   mouseUp: function(e) {
@@ -126,10 +133,11 @@ var Track = React.createClass({
   },
 
   render: function() {
-    return <canvas onMouseMove={this.mouseMove} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}
+    return <canvas onMouseLeave={this.mouseLeave} onMouseMove={this.mouseMove}
+      onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}
       className="track-editor" width={this.props.width}
       height={this.props.height}>
-      </canvas>
+    </canvas>
   }
 });
 

@@ -18,10 +18,16 @@ load(buffers, audioContext, function(err, buffers) {
   };
 
   var wob = wobble(audioContext);
-  //var bassWob = wobble(audioContext);
+  var bassWob = wobble(audioContext);
 
+  var melody = audioContext.createOscillator();
+  melody.type = 'triangle';
+  var melodyGain = audioContext.createGain();
+  melody.connect(melodyGain);
+  melodyGain.connect(audioContext.destination);
+  melodyGain.gain.value = 0.001;
 
-  function beatEmitter(beats) {
+  function beatEmitter(beatTimes) {
     // TODO: record wah track, play it back
     // a e d g
     //bassWob.src.frequency.setValueAtTime(notes('C1'), beats[0]);
@@ -31,20 +37,38 @@ load(buffers, audioContext, function(err, buffers) {
     //wob.src.frequency.setValueAtTime(notes('F3'), beats[12]);
     //wob.src.frequency.setValueAtTime(notes('D3'), beats[14]);
     //wob.src.frequency.setValueAtTime(notes('C1'), beats[beats.length - 4]);
-    wob.freqLfo.frequency.setValueAtTime(3, beats[0]);
-    wob.src.frequency.setValueAtTime(notes('G#2'), beats[0]);
-    wob.src.frequency.setValueAtTime(notes('G#3'), beats[2]);
-    wob.src.frequency.setValueAtTime(notes('D5'), beats[4]);
-    wob.src.frequency.exponentialRampToValueAtTime(notes('D4'), beats[8]);
-    wob.src.frequency.setValueAtTime(notes('G#1'), beats[beats.length - 4]);
 
-    wob.lfo.frequency.setValueAtTime(3, beats[0]);
-    wob.freqLfo.frequency.setValueAtTime(3, beats[0]);
-    wob.lfo.frequency.setValueAtTime(2, beats[beats.length - 4]);
-    wob.freqLfo.frequency.setValueAtTime(2, beats[beats.length - 4]);
+    melodyGain.gain.setValueAtTime(0.001, beatTimes[0]);
+    melodyGain.gain.setValueAtTime(0.6, beatTimes[17]);
+    melody.frequency.setValueAtTime(notes('A4'), beatTimes[17]);
+    melody.frequency.setValueAtTime(notes('c5'), beatTimes[18]);
+    melody.frequency.setValueAtTime(notes('a4'), beatTimes[19]);
+    melody.frequency.setValueAtTime(notes('b4'), beatTimes[20]);
+    melody.frequency.setValueAtTime(notes('a4'), beatTimes[21]);
+    melody.frequency.setValueAtTime(notes('g4'), beatTimes[22]);
+    melodyGain.gain.setValueAtTime(0.01, beatTimes[23]);
+
+    melodyGain.gain.setValueAtTime(0.6, beatTimes[25]);
+    melody.frequency.setValueAtTime(notes('A4'), beatTimes[25]);
+    melody.frequency.setValueAtTime(notes('c5'), beatTimes[26]);
+    melody.frequency.setValueAtTime(notes('a4'), beatTimes[27]);
+    melody.frequency.setValueAtTime(notes('b4'), beatTimes[28]);
+    melody.frequency.setValueAtTime(notes('g4'), beatTimes[29]);
+    melody.frequency.setValueAtTime(notes('d5'), beatTimes[30]);
+    melodyGain.gain.setValueAtTime(0.01, beatTimes[31]);
+
+    var triplet = 1 / ((beats.secondsPerBeat() * 2) / 3);
+    var sixteenth = (beats.secondsPerBeat() * 2)
+    wob.freqLfo.frequency.setValueAtTime(triplet, beatTimes[0]);
+    wob.lfo.frequency.setValueAtTime(triplet, beatTimes[0]);
+    wob.src.frequency.setValueAtTime(notes('A2'), beatTimes[0]);
+    wob.src.frequency.setValueAtTime(notes('E2'), beatTimes[4]);
+    wob.src.frequency.setValueAtTime(notes('D2'), beatTimes[8]);
+    wob.src.frequency.exponentialRampToValueAtTime(notes('G2'), beatTimes[12]);
+    wob.src.frequency.setValueAtTime(notes('G1'), beatTimes[beatTimes.length - 3]);
   }
 
-  var beats = new Beats(audioContext, instrumentsToBuffers, {beatEmitter: beatEmitter});
+  var beats = new Beats(audioContext, instrumentsToBuffers, {beatEmitter: beatEmitter, bpm: 144});
 
 
   var textarea = document.querySelector('.wobble-beats');
@@ -52,18 +76,19 @@ load(buffers, audioContext, function(err, buffers) {
   var isPlaying = false;
 
   button.addEventListener('click', function() {
+    console.log('click called!');
     var text = textarea.value;
     var track = beats.notation(text);
     beats.startPlaying(track);
     wob.src.start();
-    //bassWob.src.start();
+    melody.start();
   });
 
   var stopButton = document.querySelector('.stop-the-wobble-beat');
   stopButton.addEventListener('click', function() {
     beats.stop();
     wob.src.stop();
-    //bassWob.src.stop();
+    melody.stop();
   });
 });
 

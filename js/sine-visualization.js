@@ -2,7 +2,7 @@ var audioContext = window.ctx;
 var isPlaying = false;
 
 var oscillator = audioContext.createOscillator();
-oscillator.frequency.value = 180;
+oscillator.frequency.value = 300;
 
 oscillator.connect(audioContext.destination);
 

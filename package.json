@@ -13,12 +13,15 @@
     "boids": "^1.0.0",
     "browserify": "^5.11.0",
     "express": "^4.9.0",
+    "flip": "^0.1.1",
     "gulp": "^3.8.7",
     "notes-to-frequencies": "^1.0.0",
     "react": "^0.11.1",
     "reactify": "^0.14.0",
     "socket.io": "^1.1.0",
+    "ticker": "^0.1.0",
     "vinyl-source-stream": "^0.1.1",
+    "vocoder": "^0.1.1",
     "webaudio-buffer-loader": "^1.0.0"
   }
 }

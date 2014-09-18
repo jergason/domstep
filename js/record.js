@@ -2,8 +2,6 @@
 var Recorder = require('recorderjs');
 var React = require('react');
 
-// for React dev tools
-window.React = React;
 var Track = require('./record/track');
 var audioContext = window.ctx;
 
@@ -92,7 +90,9 @@ var App = React.createClass({
 
     return (
       <div>
-        <Track buffer={this.state.buffer} onTrimmed={this.handleTrimmedBuffer} />
+        <div>
+          <Track buffer={this.state.buffer} onTrimmed={this.handleTrimmedBuffer} />
+        </div>
         <button onClick={this.toggleRecording}>{buttonText}</button>
         {playSelection}
       </div>
