@@ -1,15 +1,17 @@
 {
   "name": "domstep-slides",
   "version": "1.0.0",
-  "description": "",
+  "description": "Slides from my 2014 StrangeLoop talk, DOMStep, A Browser Dance Party",
   "main": "presentation.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build"
   },
-  "author": "",
+  "author": "Jamison Dance <jergason@gmail.com> (http://jamisondance.com)",
   "license": "ISC",
   "dependencies": {
     "ar-drone": "^0.3.2",
+    "beatsjs": "^0.2.0",
     "boids": "^1.0.0",
     "browserify": "^5.11.0",
     "express": "^4.9.0",
@@ -18,10 +20,12 @@
     "notes-to-frequencies": "^1.0.0",
     "react": "^0.11.1",
     "reactify": "^0.14.0",
+    "recorderjs": "^1.0.1",
     "socket.io": "^1.1.0",
     "ticker": "^0.1.0",
     "vinyl-source-stream": "^0.1.1",
     "vocoder": "^0.1.1",
-    "webaudio-buffer-loader": "^1.0.0"
+    "webaudio-buffer-loader": "^1.0.0",
+    "workerify": "^0.3.0"
   }
 }

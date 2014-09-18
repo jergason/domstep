@@ -10,7 +10,6 @@ var wobble = require('./wobble');
 var Drone = require('./performance/drone');
 var DrumTrack = require('./performance/drumtrack');
 var Vocoder = require('./performance/vocoder');
-var Flight = require('./performance/flight');
 var Visualize = require('./performance/visualize');
 var Synth = require('./performance/synthtrack');
 
@@ -261,7 +260,6 @@ chorus += 'cp| -- -- -- -- -- -- -- -- | -- -- -- -- -- -- -- -- | -- -- -- -- -
 
     return <div className="performanceContainer">
       <div className="extras instrument-container">
-        <Flight ctx={this.props.ctx} onSelected={this.addBeatsFunction} onDeselected={this.removeBeatsFunction} />
         <Drone ctx={this.props.ctx} />
         <Vocoder ctx={this.props.ctx} carrier={this.state.carrier} note='A2' />
         <Vocoder ctx={this.props.ctx} carrier={this.state.carrier} note='E2' />
